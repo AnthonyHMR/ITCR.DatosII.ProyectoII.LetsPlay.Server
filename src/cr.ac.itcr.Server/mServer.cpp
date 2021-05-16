@@ -36,7 +36,7 @@ int mServer::runServer() {
         cerr << "Can't listen!";
         return -3;
     }
-
+    cout << "\n Listening for a call..."<<endl;
     // Accept a call
     sockaddr_in client;
     char host[NI_MAXHOST];
