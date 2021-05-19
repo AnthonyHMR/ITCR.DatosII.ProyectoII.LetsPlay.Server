@@ -7,9 +7,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
+#include <climits>
+#include <cstring>
+
+// `M × N` matrix
+#define M 10
+#define N 10
 using namespace std;
 class Backtracker {
 private:
+    int min_dist = INT_MAX;
     //Donde 0 es un obstaculo y 1 es camino libre
     int grid[4][4] = {
             1 ,1 ,0 ,1,
@@ -17,17 +24,33 @@ private:
             1 ,1 ,1 ,0,
             0 ,0 ,1 ,1
     };
-    int path[4][4] = {
-            0 ,0 ,0 ,0,
-            0 ,0 ,0 ,0,
-            0 ,0 ,0 ,0,
-            0 ,0 ,0 ,0
-    };
+    int path[M][N];
+    int mat[M][N] =
+            {
+                    1, 1, 1, 1, 1, 0, 0, 1, 1, 1 ,
+                    0, 1, 1, 1, 1, 1, 0, 1, 0, 1 ,
+                    0, 0, 1, 0, 1, 1, 1, 0, 0, 1 ,
+                    1, 0, 1, 1, 1, 0, 1, 1, 0, 1 ,
+                    0, 0, 0, 1, 0, 0, 0, 1, 0, 1 ,
+                    1, 0, 1, 1, 1, 0, 0, 1, 1, 0 ,
+                    0, 0, 0, 0, 1, 0, 0, 1, 0, 1 ,
+                    0, 1, 1, 1, 1, 1, 1, 1, 0, 0 ,
+                    1, 1, 1, 1, 1, 0, 0, 1, 1, 1 ,
+                    0, 0, 1, 0, 0, 1, 1, 0, 0, 1 ,
+            };
+
+    int visited[M][N];
+
+
 public:
     Backtracker();
     ~Backtracker();
     int findPath(int i, int j, int rows);
     int runExample();
+    bool isSafe(int x, int y);
+    bool isValid(int x, int y);
+    int findShortestPath( int i, int j,
+                          int x, int y, int dist);
 };
 
 
