@@ -10,7 +10,7 @@
 #include <climits>
 #include <cstring>
 
-// `M × N` matrix
+// `M × N` matriz
 #define M 10
 #define N 10
 using namespace std;
@@ -18,25 +18,19 @@ class Backtracker {
 private:
     int min_dist = INT_MAX;
     //Donde 0 es un obstaculo y 1 es camino libre
-    int grid[4][4] = {
-            1 ,1 ,0 ,1,
-            1 ,0 ,1 ,0,
-            1 ,1 ,1 ,0,
-            0 ,0 ,1 ,1
-    };
     int path[M][N];
     int mat[M][N] =
             {
-                    1, 1, 1, 1, 1, 0, 0, 1, 1, 1 ,
+                    1, 1, 1, 1, 1, 1, 0, 1, 1, 1 ,
                     0, 1, 1, 1, 1, 1, 0, 1, 0, 1 ,
-                    0, 0, 1, 0, 1, 1, 1, 0, 0, 1 ,
+                    0, 0, 1, 0, 1, 1, 1, 0, 1, 1 ,
                     1, 0, 1, 1, 1, 0, 1, 1, 0, 1 ,
-                    0, 0, 0, 1, 0, 0, 0, 1, 0, 1 ,
-                    1, 0, 1, 1, 1, 0, 0, 1, 1, 0 ,
-                    0, 0, 0, 0, 1, 0, 0, 1, 0, 1 ,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,
+                    1, 1, 0, 0, 1, 1, 0, 1, 0, 1 ,
                     0, 1, 1, 1, 1, 1, 1, 1, 0, 0 ,
                     1, 1, 1, 1, 1, 0, 0, 1, 1, 1 ,
-                    0, 0, 1, 0, 0, 1, 1, 0, 0, 1 ,
+                    1, 1, 1, 0, 1, 1, 1, 0, 1, 1 ,
             };
 
     int visited[M][N];
@@ -45,7 +39,6 @@ private:
 public:
     Backtracker();
     ~Backtracker();
-    int findPath(int i, int j, int rows);
     int runExample();
     bool isSafe(int x, int y);
     bool isValid(int x, int y);
