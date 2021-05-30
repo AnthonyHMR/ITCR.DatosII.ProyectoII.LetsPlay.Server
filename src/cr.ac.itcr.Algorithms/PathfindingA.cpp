@@ -244,7 +244,7 @@ delete pNode1;
 return "";
 }
 
-int main()
+/*int main()
 {
     // create empty squares
     for(int j = 0; j < JDIM; j++) {
@@ -308,4 +308,4 @@ int main()
         }
     }
     return(0);
-}
+}*/
