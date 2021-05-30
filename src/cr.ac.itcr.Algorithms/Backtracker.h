@@ -10,6 +10,8 @@
 #include <climits>
 #include <cstring>
 
+
+
 // `M × N` matriz
 #define M 10
 #define N 10
@@ -18,6 +20,7 @@ class Backtracker {
 private:
     int min_dist = INT_MAX;
     //Donde 0 es un obstaculo y 1 es camino libre
+
     int path[M][N];
     int mat[M][N] =
             {

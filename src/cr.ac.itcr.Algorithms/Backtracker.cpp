@@ -6,7 +6,7 @@
 #include "Backtracker.h"
 int Backtracker::runExample() {
     //Encontrar el camino màs corto desde (0, 0) hasta (7, 7)
-    findShortestPath(0, 0, 7, 7, 0);
+    findShortestPath(0, 0, 7, 5, 0);
 
     if (min_dist != INT_MAX)
     {
@@ -74,6 +74,7 @@ int Backtracker::findShortestPath(int i, int j,
         findShortestPath(i + 1, j, x, y, dist + 1);
 
     }
+
     // ir a la derecha
     if (isValid(i, j + 1) && isSafe(i, j + 1)) {
 

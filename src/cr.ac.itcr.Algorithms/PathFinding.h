@@ -18,9 +18,9 @@ public:
     bool m_foundGoal;
 
 private:
-    void SetStartAndGoal(SeachCell start, SeachCell goal);
-    void PathOpened (int x, int z, float newCost, SeachCell *parent);
-    SeachCell *GetNextCell();
+    void SetStartAndGoal(SearchCell start, SearchCell goal);
+    void PathOpened (int x, int z, float newCost, SearchCell *parent);
+    SearchCell *GetNextCell();
     void ContinuePath ();
 
     SearchCell *m_startCell;
