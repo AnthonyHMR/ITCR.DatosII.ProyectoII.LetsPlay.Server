@@ -103,6 +103,7 @@ void mServer::getMessage() {
 }
 void mServer::processMessage(string message){
     json jsonReader = json::parse(message);
+    //Revisar json cuando el juego va a inicio, equipos, jugadores
     if (message.find("Players") != string::npos){
         this->jsonParser->readGameSetUp(jsonReader, team1, team2);
         if(jsonReader["GameMode"] == 1){
@@ -110,6 +111,19 @@ void mServer::processMessage(string message){
         }
         else if(jsonReader["GameMode"] == 2){
             this->gameMode = 2;
+        }
+    }
+    //Revisar json cuando un jugador va a tirar para generar el camino màs corto
+    if (message.find("Shoot") != string::npos){
+        Player *Shooter;
+        Shooter = searchPlayer(jsonReader["Shoot"]["Team"], jsonReader["Shoot"]["ID"]);
+        int x = Shooter->getPosX();
+        int y = Shooter->getPosY();
+        if(gameMode == 1){
+            //Aplicar algoritmo A star
+        }
+        else if(gameMode == 2){
+            //Aplicar algoritmo bactracking
         }
     }
 
@@ -122,6 +136,29 @@ void mServer::sendMessage(string message) {
     int sendRes = send(clientSocket, message.c_str(), message.size() + 1, 0);
     if (sendRes == -1) {
         cout << "Could not send to client!\r\n";
+    }
+}
+//Recorre la lista de jugadores segùn equipo
+Player * mServer::searchPlayer(int team, int ID) {
+    if (team == 1){
+        int len = team1->size;
+        Player *current;
+        for (int i = 0; i < len; i++){
+            current = this->team1->getData(i);
+            if(current->getId() == ID){
+                return current;
+            }
+        }
+    }
+    else if (team == 2){
+        int len = team2->size;
+        Player *current;
+        for (int i = 0; i < len; i++){
+            current = this->team2->getData(i);
+            if(current->getId() == ID){
+                return current;
+            }
+        }
     }
 }
 

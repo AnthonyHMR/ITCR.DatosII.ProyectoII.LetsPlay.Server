@@ -7,7 +7,7 @@
 
 
 class Player {
-    int ID = 0;
+
 public:
     int getId() const;
 
@@ -29,6 +29,7 @@ private:
     int team = 0;
     int posX = 0;
     int posY = 0;
+    int ID = 0;
 
 };
 

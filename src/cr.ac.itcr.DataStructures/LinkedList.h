@@ -6,19 +6,20 @@
 #define ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_LINKEDLIST_H
 #include <iostream>
 #include "Node.h"
-template<class T>
+
+
 class LinkedList {
 public:
-    Node<T> *head;
-    Node<T> *tail;
+    Node *head;
+    Node *tail;
     int size = 0;
-    LinkedList<T>(){
+    LinkedList(){
         this->head = nullptr;
         this->tail = nullptr;
     }
-    void Add(T data){
+    void Add(Player *data){
         if (isEmpty()){
-            this->head = new Node<T>(data);
+            this->head = new Node(data);
             this->tail = this->head;
             size ++;
 
@@ -27,13 +28,13 @@ public:
             // The list isn't empty
             if(this->tail == this->head) {
                 // The list has one element
-                this->tail = new Node<T>(data);
+                this->tail = new Node(data);
 
                 this->head->setNext(this->tail);
                 size ++;
             } else {
                 // The list has more than one element
-                Node<T>* newData = new Node<T>(data);
+                Node* newData = new Node(data);
                 this->tail->setNext(newData);
                 this->tail = newData;
                 size++;
@@ -44,21 +45,21 @@ public:
         if (this->head == nullptr) return true;
         else return false;
     }
-    T getData(int index){
+    Player * getData(int index){
         if(index == 0) {
             // Get the first element
             return this->head->getData();
         } else {
             // Get the index'th element
-            Node<T>* curr = this->head;
+            Node* curr = this->head;
             for(int i = 0; i < index; ++i) {
                 curr = curr->getNext();
             }
             return curr->getData();
         }
     }
-    T operator[](int index){
-        return getData(index);
+    Player operator[](int index){
+        return *getData(index);
     }
 
 };

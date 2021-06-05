@@ -17,7 +17,7 @@ class JsonParser {
 private:
     Player *player = new Player();
 public:
-    void readGameSetUp(json gameSet, LinkedList<Player> *team1, LinkedList<Player> *team2);
+    void readGameSetUp(json gameSet, LinkedList *team1, LinkedList *team2);
     void readPlayerPath();
     static void writePath();
 

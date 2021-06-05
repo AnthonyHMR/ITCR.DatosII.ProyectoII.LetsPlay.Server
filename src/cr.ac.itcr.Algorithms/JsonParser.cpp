@@ -5,7 +5,7 @@
 #include <fstream>
 #include "JsonParser.h"
 using namespace std;
-void JsonParser::readGameSetUp(json gameSet, LinkedList<Player> *team1, LinkedList<Player> *team2){
+void JsonParser::readGameSetUp(json gameSet, LinkedList *team1, LinkedList *team2){
 
     for (int i = 0; gameSet["Players"].size() != i; i++) {
         Player *currentPlayer = new Player();
@@ -15,10 +15,10 @@ void JsonParser::readGameSetUp(json gameSet, LinkedList<Player> *team1, LinkedLi
         currentPlayer->setTeam(gameSet["Players"][i]["Team"]);
         cout << "Player ID: " << currentPlayer->getId() << " Player addr: " << &currentPlayer<<endl;
         if(currentPlayer->getTeam() == 1){
-            team1->Add(*currentPlayer);
+            team1->Add(currentPlayer);
         }
         else if (currentPlayer->getTeam() == 2){
-            team2->Add(*currentPlayer);
+            team2->Add(currentPlayer);
         }
     }
 
