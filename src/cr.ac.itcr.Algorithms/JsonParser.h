@@ -8,6 +8,7 @@
 #include <nlohmann/json.hpp>
 #include <stdio.h>
 #include "Player.h"
+#include "../cr.ac.itcr.DataStructures/LinkedList.h"
 #include <iostream>
 using namespace std;
 using json = nlohmann::json;
@@ -16,7 +17,7 @@ class JsonParser {
 private:
     Player *player = new Player();
 public:
-    void readGameSetUp();
+    void readGameSetUp(json gameSet, LinkedList<Player> *team1, LinkedList<Player> *team2);
     void readPlayerPath();
     static void writePath();
 

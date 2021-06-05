@@ -97,10 +97,23 @@ int mServer::runServer() {
 }
 
 void mServer::getMessage() {
+    string received = string(buf, 0, bytesRecv);
     cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
+    processMessage(received);
+}
+void mServer::processMessage(string message){
+    json jsonReader = json::parse(message);
+    if (message.find("Players") != string::npos){
+        this->jsonParser->readGameSetUp(jsonReader, team1, team2);
+        if(jsonReader["GameMode"] == 1){
+            this->gameMode = 1;
+        }
+        else if(jsonReader["GameMode"] == 2){
+            this->gameMode = 2;
+        }
+    }
 
 }
-
 void mServer::sendMessage(string message) {
     // Enter lines of text
     cout << "> ";

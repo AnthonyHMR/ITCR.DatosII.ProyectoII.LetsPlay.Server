@@ -5,24 +5,23 @@
 #include <fstream>
 #include "JsonParser.h"
 using namespace std;
-void JsonParser::readGameSetUp(){
-    ifstream gameSU("../Player.json");
-    json gameSetUp;
-    gameSU >> gameSetUp;
-    for (int i = 0; gameSetUp["Players"].size() != i; i++) {
-        player->setId(gameSetUp["Players"][i]["ID"]);
-        player->setPosX(gameSetUp["Players"][i]["PosX"]);
-        player->setPosY(gameSetUp["Players"][i]["PosY"]);
-        player->setTeam(gameSetUp["Players"][i]["Team"]);
-        cout << "Player ID: " << player->getId() <<endl;
+void JsonParser::readGameSetUp(json gameSet, LinkedList<Player> *team1, LinkedList<Player> *team2){
+
+    for (int i = 0; gameSet["Players"].size() != i; i++) {
+        Player *currentPlayer = new Player();
+        currentPlayer->setId(gameSet["Players"][i]["ID"]);
+        currentPlayer->setPosX(gameSet["Players"][i]["PosX"]);
+        currentPlayer->setPosY(gameSet["Players"][i]["PosY"]);
+        currentPlayer->setTeam(gameSet["Players"][i]["Team"]);
+        cout << "Player ID: " << currentPlayer->getId() << " Player addr: " << &currentPlayer<<endl;
+        if(currentPlayer->getTeam() == 1){
+            team1->Add(*currentPlayer);
+        }
+        else if (currentPlayer->getTeam() == 2){
+            team2->Add(*currentPlayer);
+        }
     }
 
-    if (gameSetUp["GameMode"] == 1) {
-        cout << "Set the A-star pathfinding algorithm"<<endl;
-    }
-    if (gameSetUp["GameMode"] == 2) {
-        cout << "Set the backtracking algorithm "<<endl;
-    }
 }
 void JsonParser::readPlayerPath(){
     //Search for the player in the list and use the pathfnding algorithm
