@@ -14,12 +14,27 @@ using namespace std;
 using json = nlohmann::json;
 
 class JsonParser {
-private:
-    Player *player = new Player();
+    /**
+     * @class this class performs serialization methods in order to
+     * read and write messages in json format
+     */
+
 public:
+    /**
+     * @brief reads the game settings sent by the client and
+     * @param gameSet settings that include the game mode and the amount of players to be
+     * added
+     * @param team1 team number one
+     * @param team2 team number two
+     */
     void readGameSetUp(json gameSet, LinkedList *team1, LinkedList *team2);
-    void readPlayerPath();
-    static void writePath();
+    /**
+     * @brief writes the shortest path found by the algorithm
+     * @param M integer, represents the amount of blocks the path has
+     * @param x integer, x-coordinate of a given block
+     * @param y integer, y-coordinate of a given block
+     */
+    void writePath(int M, int x, int y);
 
 };
 

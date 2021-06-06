@@ -106,6 +106,8 @@ void mServer::processMessage(string message){
     //Revisar json cuando el juego va a inicio, equipos, jugadores
     if (message.find("Players") != string::npos){
         this->jsonParser->readGameSetUp(jsonReader, team1, team2);
+        storePlayerLocation(team1);
+        storePlayerLocation(team2);
         if(jsonReader["GameMode"] == 1){
             this->gameMode = 1;
         }
@@ -123,7 +125,28 @@ void mServer::processMessage(string message){
             //Aplicar algoritmo A star
         }
         else if(gameMode == 2){
+            if (Shooter->getTeam() == 1 ){
+                backtrack->findShortestPath(x, y, 6, 5, 0);
+                for (int k = 0; k < M; k++){
+                    for (int l = 0; l < N; l++) {
+                        if(backtrack->path[k][l] == 1){
+                            printf("(%d, %d)-->\n",k, l);
+                        }
+                    }
+                }
+            }
+            else if (Shooter->getTeam() == 2 ){
+                backtrack->findShortestPath(0, 5, x, y, 0);
+                for (int k = 0; k < M; k++){
+                    for (int l = 0; l < N; l++) {
+                        if(backtrack->path[k][l] == 1){
+                            printf("(%d, %d)-->\n",k, l);
+                        }
+                    }
+                }
+            }
             //Aplicar algoritmo bactracking
+
         }
     }
 
@@ -159,6 +182,13 @@ Player * mServer::searchPlayer(int team, int ID) {
                 return current;
             }
         }
+    }
+}
+void mServer::storePlayerLocation(LinkedList *team){
+    for (int i = 0; i < team->size; i ++){
+        int x = team->getData(i)->getPosX();
+        int y = team->getData(i)->getPosY();
+        backtrack->mat[x][y] = 0;
     }
 }
 

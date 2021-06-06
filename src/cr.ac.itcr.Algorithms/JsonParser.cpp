@@ -23,11 +23,8 @@ void JsonParser::readGameSetUp(json gameSet, LinkedList *team1, LinkedList *team
     }
 
 }
-void JsonParser::readPlayerPath(){
-    //Search for the player in the list and use the pathfnding algorithm
 
-}
-void JsonParser::writePath(){
+void JsonParser::writePath(int M, int x, int y){
     //
     int pathExample[4][2] = { {1,0},{1,1}, {1,2}, {1,3} };
     ofstream shortestPath("../shortestPath.json");
