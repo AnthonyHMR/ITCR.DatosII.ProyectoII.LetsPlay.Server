@@ -11,8 +11,8 @@
 #include <cstring>
 
 // `M × N` matriz
-#define M 7
-#define N 10
+#define M 63
+#define N 42
 using namespace std;
 class Backtracker {
     /**
@@ -24,17 +24,7 @@ public:
     //Donde 0 es un obstaculo y 1 es camino libre
 
     int path[M][N];
-    int mat[M][N] =
-            {
-                    1, 1, 1, 1, 1, 0, 0, 1, 1, 1 ,
-                    0, 1, 1, 1, 1, 1, 0, 1, 0, 1 ,
-                    0, 0, 1, 0, 1, 1, 1, 0, 0, 1 ,
-                    1, 0, 1, 1, 1, 0, 1, 1, 0, 1 ,
-                    1, 1, 1, 1, 0, 1, 1, 1, 1, 1 ,
-                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,
-                    1, 1, 0, 0, 1, 1, 0, 1, 0, 1 ,
-
-            };
+    int mat[M][N] ;
 
     int visited[M][N];
 

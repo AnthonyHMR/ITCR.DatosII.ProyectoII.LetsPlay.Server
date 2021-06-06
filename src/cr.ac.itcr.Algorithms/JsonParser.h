@@ -34,8 +34,12 @@ public:
      * @param x integer, x-coordinate of a given block
      * @param y integer, y-coordinate of a given block
      */
-    void writePath(int M, int x, int y);
-
+    void writePath(int x, int y);
+    /**
+     * @brief Reads a jsonfile that has the shortest path found by backtrack
+     * @return string-json format array of the path
+     */
+    string sendPath() const;
 };
 
 

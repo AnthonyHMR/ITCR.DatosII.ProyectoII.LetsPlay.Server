@@ -10,8 +10,8 @@ void JsonParser::readGameSetUp(json gameSet, LinkedList *team1, LinkedList *team
     for (int i = 0; gameSet["Players"].size() != i; i++) {
         Player *currentPlayer = new Player();
         currentPlayer->setId(gameSet["Players"][i]["ID"]);
-        currentPlayer->setPosX(gameSet["Players"][i]["PosX"]);
-        currentPlayer->setPosY(gameSet["Players"][i]["PosY"]);
+        currentPlayer->setPosX(gameSet["Players"][i]["PosY"]);
+        currentPlayer->setPosY(gameSet["Players"][i]["PosX"]);
         currentPlayer->setTeam(gameSet["Players"][i]["Team"]);
         cout << "Player ID: " << currentPlayer->getId() << " Player addr: " << &currentPlayer<<endl;
         if(currentPlayer->getTeam() == 1){
@@ -24,11 +24,23 @@ void JsonParser::readGameSetUp(json gameSet, LinkedList *team1, LinkedList *team
 
 }
 
-void JsonParser::writePath(int M, int x, int y){
+void JsonParser::writePath(int x, int y){
     //
-    int pathExample[4][2] = { {1,0},{1,1}, {1,2}, {1,3} };
-    ofstream shortestPath("../shortestPath.json");
+    int path[2] = {x, y};
+    ifstream shortestPath("../shortestPath.json");
     json myPath;
-    myPath["Path"] = pathExample;
-    myPath >> shortestPath;
+    shortestPath >> myPath;
+    myPath["Path"] += path;
+
+    ofstream writeJson;
+    writeJson.open("../shortestPath.json");
+    writeJson << myPath;
+
+}
+
+string JsonParser::sendPath() const {
+    ifstream shortest("../shortestPath.json");
+    json sendPath;
+    shortest >> sendPath;
+    return to_string(sendPath);
 }

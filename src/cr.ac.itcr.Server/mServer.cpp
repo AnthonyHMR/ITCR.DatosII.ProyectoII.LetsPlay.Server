@@ -88,8 +88,6 @@ int mServer::runServer() {
         // Display message
         getMessage();
 
-        // Send message
-        sendMessage("message");
     }
 
     // Close socket
@@ -126,24 +124,32 @@ void mServer::processMessage(string message){
         }
         else if(gameMode == 2){
             if (Shooter->getTeam() == 1 ){
-                backtrack->findShortestPath(x, y, 6, 5, 0);
+                backtrack->findShortestPath(x, y, 56, 20, 0);
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
                         if(backtrack->path[k][l] == 1){
                             printf("(%d, %d)-->\n",k, l);
+                            jsonParser->writePath(l*10, k*10);
+
                         }
                     }
                 }
+                string shortestPath = jsonParser->sendPath();
+                sendMessage(shortestPath);
+
             }
             else if (Shooter->getTeam() == 2 ){
-                backtrack->findShortestPath(0, 5, x, y, 0);
+                backtrack->findShortestPath(5, 20, x, y, 0);
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
                         if(backtrack->path[k][l] == 1){
                             printf("(%d, %d)-->\n",k, l);
+                            jsonParser->writePath(l*10, k*10);
                         }
                     }
                 }
+                string shortestPath = jsonParser->sendPath();
+                sendMessage(shortestPath);
             }
             //Aplicar algoritmo bactracking
 

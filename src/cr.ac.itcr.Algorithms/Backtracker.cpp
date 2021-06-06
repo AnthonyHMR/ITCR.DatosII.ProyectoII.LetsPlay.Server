@@ -29,6 +29,7 @@ int Backtracker::runExample() {
 Backtracker::Backtracker() {
     memset(visited, 0, sizeof(visited));
     memset(path, 0, sizeof (path));
+    memset(mat, 1, sizeof (mat));
 }
 
 Backtracker::~Backtracker() {
