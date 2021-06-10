@@ -138,8 +138,8 @@ q[qi].push(*pNode1);
 while(!q[qi].empty()) {
 // get the current node w/ the lowest FValue
 // from the list of open nodes
-pNode1 = new Node( q[qi].top().getLocation(),
-                   q[qi].top().getGValue(), q[qi].top().getFValue());
+pNode1 = new Node(q[qi].top().getLocation(),
+                        q[qi].top().getGValue(), q[qi].top().getFValue());
 
 row = (pNode1->getLocation()).row;
 col = pNode1->getLocation().col;
@@ -192,7 +192,7 @@ if(!(iNext < 0 || iNext > IDIM - 1 || jNext < 0 || jNext > JDIM - 1 ||
 squares[iNext][jNext] == 1 || closedNodes[iNext][jNext] == 1)) {
 
 // generate a child node
-pNode2 = new Node( Location(iNext, jNext), pNode1->getGValue(), pNode1->getFValue());
+pNode2 = new Node(Location(iNext, jNext), pNode1->getGValue(), pNode1->getFValue());
 pNode2->updateGValue(i);
 pNode2->calculateFValue(locFinish);
 

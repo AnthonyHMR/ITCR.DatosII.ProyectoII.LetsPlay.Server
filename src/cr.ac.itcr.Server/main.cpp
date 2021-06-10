@@ -7,8 +7,8 @@
 using namespace std;
 int main() {
 
-//    mServer *server = new mServer(54000, 1024);
-//    server->runServer();*/
+    mServer *server = new mServer(54000, 1024);
+    server->runServer();
 
     return 0;
 }

@@ -5,16 +5,17 @@
 #ifndef ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_LINKEDLIST_H
 #define ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_LINKEDLIST_H
 #include <iostream>
-#include "Node.h"
+#include "PlayerNode.h"
 
+using namespace std;
 
 class LinkedList {
     /**
      * @class Stores a list of players, implemented as a singly linked list
      */
 public:
-    Node *head;
-    Node *tail;
+    PlayerNode *head;
+    PlayerNode *tail;
     int size = 0;
     /**
      * @brief Constructor that initializes head and tail nodes
@@ -29,7 +30,7 @@ public:
      */
     void Add(Player *data){
         if (isEmpty()){
-            this->head = new Node(data);
+            this->head = new PlayerNode(data);
             this->tail = this->head;
             size ++;
         }
@@ -37,24 +38,25 @@ public:
             // The list isn't empty
             if(this->tail == this->head) {
                 // The list has one element
-                this->tail = new Node(data);
+                this->tail = new PlayerNode(data);
 
                 this->head->setNext(this->tail);
                 size ++;
             } else {
                 // The list has more than one element
-                Node* newData = new Node(data);
+                PlayerNode* newData = new PlayerNode(data);
                 this->tail->setNext(newData);
                 this->tail = newData;
                 size++;
             }
         }
+        cout << "Player added"<< endl;
     }
     /**
      * @brief boolean method that checks if the list is empty
      */
     bool isEmpty(){
-        if (this->head == nullptr) return true;
+        if (this->size == 0) return true;
         else return false;
     }
     /**
@@ -67,7 +69,7 @@ public:
             return this->head->getData();
         } else {
             // Get the index-th element
-            Node* curr = this->head;
+            PlayerNode* curr = this->head;
             for(int i = 0; i < index; ++i) {
                 curr = curr->getNext();
             }

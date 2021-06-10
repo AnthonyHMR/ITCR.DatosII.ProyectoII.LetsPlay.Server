@@ -5,8 +5,8 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
-#include <string.h>
-#include <string>
+#include <cstring>
+
 
 using namespace std;
 
@@ -115,8 +115,8 @@ void mServer::processMessage(string message){
     }
     //Revisar json cuando un jugador va a tirar para generar el camino màs corto
     if (message.find("Shoot") != string::npos){
-        Player *Shooter;
-        Shooter = searchPlayer(jsonReader["Shoot"]["Team"], jsonReader["Shoot"]["ID"]);
+        cout << "Found shooter\n"<<endl;
+        Player *Shooter = searchPlayer(jsonReader["Shoot"]["Team"], jsonReader["Shoot"]["ID"]);
         int x = Shooter->getPosX();
         int y = Shooter->getPosY();
         if(gameMode == 1){
@@ -124,7 +124,9 @@ void mServer::processMessage(string message){
         }
         else if(gameMode == 2){
             if (Shooter->getTeam() == 1 ){
+                cout << "Entering backtracker\n"<<endl;
                 backtrack->findShortestPath(x, y, 56, 20, 0);
+                cout <<"Exiting backtracker\n"<<endl;
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
                         if(backtrack->path[k][l] == 1){
@@ -171,9 +173,9 @@ void mServer::sendMessage(string message) {
 Player * mServer::searchPlayer(int team, int ID) {
     if (team == 1){
         int len = team1->size;
-        Player *current;
+
         for (int i = 0; i < len; i++){
-            current = this->team1->getData(i);
+            Player *current = this->team1->getData(i);
             if(current->getId() == ID){
                 return current;
             }
@@ -181,9 +183,9 @@ Player * mServer::searchPlayer(int team, int ID) {
     }
     else if (team == 2){
         int len = team2->size;
-        Player *current;
+
         for (int i = 0; i < len; i++){
-            current = this->team2->getData(i);
+            Player *current = this->team2->getData(i);
             if(current->getId() == ID){
                 return current;
             }

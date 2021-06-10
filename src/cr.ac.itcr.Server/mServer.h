@@ -64,8 +64,8 @@ private:
     char buf[4096];
     int clientSocket;
     int bytesRecv;
-    LinkedList *team1;
-    LinkedList *team2;
+    LinkedList *team1 = new LinkedList();
+    LinkedList *team2 = new LinkedList();
     JsonParser *jsonParser = new JsonParser();
     int gameMode = 0;
     Backtracker *backtrack = new Backtracker();

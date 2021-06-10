@@ -2,32 +2,33 @@
 // Created by juanpr on 2/6/21.
 //
 
-#ifndef ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_NODE_H
-#define ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_NODE_H
+#ifndef ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_PLAYERNODE_H
+#define ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_PLAYERNODE_H
 #include <iostream>
 #include "../cr.ac.itcr.Algorithms/Player.h"
 
-class Node {
+using namespace std;
+class PlayerNode {
     /**
      * @class Node class has a player pointer and next node pointer used for a
      * singly linked list implementation
      */
 private:
-    Node *next ;
+    PlayerNode *next ;
     Player *data ;
 public:
     /**
      * @brief getter method of the next node
      * @returns next
      */
-    Node *getNext() const {
+    PlayerNode *getNext() const {
         return next;
     }
     /**
      * @brief setter method of the next node
      */
-    void setNext(Node *next) {
-        Node::next = next;
+    void setNext(PlayerNode *next) {
+        PlayerNode::next = next;
     }
     /**
      * @brief getter method of the data (Player)
@@ -40,14 +41,16 @@ public:
      * @brief setter method of the dataa
      */
     void setData(Player *data) {
-        Node::data = data;
+        PlayerNode::data = data;
+
+
     }
     /**
      * @brief Constructor that initializes a data and its next node
      * @param data is the player
      * @param next is the pointer to the next Node
      */
-    Node(Player *data, Node *next){
+    PlayerNode(Player *data, PlayerNode *next){
         this->data = data;
         this->next = next;
     }
@@ -55,10 +58,11 @@ public:
      * @brief Constructor that initializes a data
      * @param data is the player
      */
-    Node(Player *data){
+    PlayerNode(Player *data){
         this->data = data;
         this->next = NULL;
+        cout<<"New player adrr: "<< &this->data<<endl;
     }
 };
 
-#endif //ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_NODE_H
+#endif //ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_PLAYERNODE_H
