@@ -6,7 +6,9 @@
 #include "../cr.ac.itcr.DataStructures/LinkedList.h"
 #include "../cr.ac.itcr.Algorithms/Player.h"
 #include "../cr.ac.itcr.Algorithms/JsonParser.h"
-#include "../cr.ac.itcr.Algorithms/Backtracker.h"
+#include "../cr.ac.itcr.Algorithms/Backtracking.h"
+#define M 20
+#define N 30
 using namespace std;
 using json = nlohmann::json;
 /**
@@ -68,7 +70,8 @@ private:
     LinkedList *team2 = new LinkedList();
     JsonParser *jsonParser = new JsonParser();
     int gameMode = 0;
-    Backtracker *backtrack = new Backtracker();
+    int mat[M][N];
+
 
 };
 

@@ -40,6 +40,11 @@ public:
      * @return string-json format array of the path
      */
     string sendPath() const;
+    /**
+     * @brief Deletes the previous found path
+     *
+     */
+    void cleanPath();
 };
 
 

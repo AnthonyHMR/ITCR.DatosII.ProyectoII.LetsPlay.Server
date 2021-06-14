@@ -10,7 +10,12 @@
 
 using namespace std;
 
-mServer::mServer(int listenPort, int memSize) : port(listenPort), size(memSize) {}
+mServer::mServer(int listenPort, int memSize) : port(listenPort), size(memSize) {
+    for(int i = 0; i < M; i++) {
+        for (int j = 0; j < N ; j++)
+            mat[i][j] = 1;
+    }
+}
 
 int mServer::runServer() {
     // Create a socket
@@ -106,15 +111,22 @@ void mServer::processMessage(string message){
         this->jsonParser->readGameSetUp(jsonReader, team1, team2);
         storePlayerLocation(team1);
         storePlayerLocation(team2);
-        if(jsonReader["GameMode"] == 1){
+        for(int i = 0; i < M; i++){
+            for (int j = 0; j< N; j++)
+                printf(" %d ", this->mat[i][j]);
+            printf("\n");
+        }
+        jsonReader["GameMode"].get_to(this->gameMode);
+        /*if(jsonReader["GameMode"] == 1){
             this->gameMode = 1;
         }
         else if(jsonReader["GameMode"] == 2){
             this->gameMode = 2;
-        }
+        }*/
     }
     //Revisar json cuando un jugador va a tirar para generar el camino màs corto
     if (message.find("Shoot") != string::npos){
+        jsonParser->cleanPath();
         cout << "Found shooter\n"<<endl;
         Player *Shooter = searchPlayer(jsonReader["Shoot"]["Team"], jsonReader["Shoot"]["ID"]);
         int x = Shooter->getPosX();
@@ -124,36 +136,35 @@ void mServer::processMessage(string message){
         }
         else if(gameMode == 2){
             if (Shooter->getTeam() == 1 ){
-                cout << "Entering backtracker\n"<<endl;
-                backtrack->findShortestPath(x, y, 56, 20, 0);
-                cout <<"Exiting backtracker\n"<<endl;
+                Backtracking backtracking(this->mat, x+1, y, 29, 10);
+                backtracking.findPath(this->mat);
+                backtracking.printSol(backtracking.sol);
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
-                        if(backtrack->path[k][l] == 1){
-                            printf("(%d, %d)-->\n",k, l);
+                        if(backtracking.sol[k][l] == 1){
                             jsonParser->writePath(l*10, k*10);
-
                         }
                     }
                 }
                 string shortestPath = jsonParser->sendPath();
+
                 sendMessage(shortestPath);
 
             }
             else if (Shooter->getTeam() == 2 ){
-                backtrack->findShortestPath(5, 20, x, y, 0);
+                Backtracking backtracking(this->mat, 1, 10, x-1, y);
+                backtracking.findPath(this->mat);
+                backtracking.printSol(backtracking.sol);
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
-                        if(backtrack->path[k][l] == 1){
-                            printf("(%d, %d)-->\n",k, l);
+                        if(backtracking.sol[k][l] == 1){
                             jsonParser->writePath(l*10, k*10);
                         }
                     }
                 }
-                string shortestPath = jsonParser->sendPath();
-                sendMessage(shortestPath);
             }
-            //Aplicar algoritmo bactracking
+            string shortestPath = jsonParser->sendPath();
+            sendMessage(shortestPath);
 
         }
     }
@@ -161,8 +172,6 @@ void mServer::processMessage(string message){
 }
 void mServer::sendMessage(string message) {
     // Enter lines of text
-    cout << "> ";
-    getline(cin, message);
 
     int sendRes = send(clientSocket, message.c_str(), message.size() + 1, 0);
     if (sendRes == -1) {
@@ -196,7 +205,7 @@ void mServer::storePlayerLocation(LinkedList *team){
     for (int i = 0; i < team->size; i ++){
         int x = team->getData(i)->getPosX();
         int y = team->getData(i)->getPosY();
-        backtrack->mat[x][y] = 0;
+        this->mat[x][y] = 0;
     }
 }
 

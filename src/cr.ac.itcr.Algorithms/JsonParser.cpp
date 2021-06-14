@@ -37,6 +37,7 @@ void JsonParser::writePath(int x, int y){
     ofstream writeJson;
     writeJson.open("../shortestPath.json");
     writeJson << myPath;
+    writeJson.close();
 
 }
 
@@ -44,5 +45,17 @@ string JsonParser::sendPath() const {
     ifstream shortest("../shortestPath.json");
     json sendPath;
     shortest >> sendPath;
+    shortest.close();
     return to_string(sendPath);
+}
+
+void JsonParser::cleanPath() {
+    ofstream shortest;
+    shortest.open("../shortestPath.json");
+    ifstream cleaner("../cleanPath.json");
+    json clean;
+    cleaner >> clean;
+    shortest << clean;
+    shortest.close();
+    cleaner.close();
 }
