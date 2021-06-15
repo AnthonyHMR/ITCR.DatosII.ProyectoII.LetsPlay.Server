@@ -5,11 +5,12 @@
 #ifndef ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_JSONPARSER_H
 #define ITCR_DATOSII_PROYECTOII_LETSPLAY_SERVER_JSONPARSER_H
 #include <string>
+#include <iostream>
 #include <nlohmann/json.hpp>
 #include <stdio.h>
 #include "Player.h"
 #include "../cr.ac.itcr.DataStructures/LinkedList.h"
-#include <iostream>
+
 using namespace std;
 using json = nlohmann::json;
 

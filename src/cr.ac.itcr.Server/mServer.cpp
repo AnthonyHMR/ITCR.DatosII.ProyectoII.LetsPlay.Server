@@ -117,12 +117,6 @@ void mServer::processMessage(string message){
             printf("\n");
         }
         jsonReader["GameMode"].get_to(this->gameMode);
-        /*if(jsonReader["GameMode"] == 1){
-            this->gameMode = 1;
-        }
-        else if(jsonReader["GameMode"] == 2){
-            this->gameMode = 2;
-        }*/
     }
     //Revisar json cuando un jugador va a tirar para generar el camino màs corto
     if (message.find("Shoot") != string::npos){
@@ -132,13 +126,39 @@ void mServer::processMessage(string message){
         int x = Shooter->getPosX();
         int y = Shooter->getPosY();
         if(gameMode == 1){
-            //Aplicar algoritmo A star
+            if (Shooter->getTeam() == 1){
+                PathfindingAStar aStar(this->mat, x, y, 29, 10);
+                aStar.findPath();
+
+                for (int k = 0; k < M; k++){
+                    for (int l = 0; l < N; l++) {
+                        if(aStar.sol[k][l] == 1){
+                            jsonParser->writePath(l*10, k*10);
+                        }
+                    }
+                }
+                string shortestPath = jsonParser->sendPath();
+                sendMessage(shortestPath);
+            }
+            else if (Shooter->getTeam() == 2){
+                PathfindingAStar aStar(this->mat, 1, 10, x, y);
+                aStar.findPath();
+
+                for (int k = 0; k < M; k++){
+                    for (int l = 0; l < N; l++) {
+                        if(aStar.sol[k][l] == 1){
+                            jsonParser->writePath(l*10, k*10);
+                        }
+                    }
+                }
+                string shortestPath = jsonParser->sendPath();
+                sendMessage(shortestPath);
+            }
         }
         else if(gameMode == 2){
             if (Shooter->getTeam() == 1 ){
                 Backtracking backtracking(this->mat, x+1, y, 29, 10);
                 backtracking.findPath(this->mat);
-                backtracking.printSol(backtracking.sol);
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
                         if(backtracking.sol[k][l] == 1){
@@ -147,14 +167,13 @@ void mServer::processMessage(string message){
                     }
                 }
                 string shortestPath = jsonParser->sendPath();
-
                 sendMessage(shortestPath);
 
             }
             else if (Shooter->getTeam() == 2 ){
                 Backtracking backtracking(this->mat, 1, 10, x-1, y);
                 backtracking.findPath(this->mat);
-                backtracking.printSol(backtracking.sol);
+
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
                         if(backtracking.sol[k][l] == 1){
@@ -162,10 +181,9 @@ void mServer::processMessage(string message){
                         }
                     }
                 }
+                string shortestPath = jsonParser->sendPath();
+                sendMessage(shortestPath);
             }
-            string shortestPath = jsonParser->sendPath();
-            sendMessage(shortestPath);
-
         }
     }
 

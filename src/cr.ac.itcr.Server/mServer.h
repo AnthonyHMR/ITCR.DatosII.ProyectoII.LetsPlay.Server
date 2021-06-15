@@ -7,6 +7,7 @@
 #include "../cr.ac.itcr.Algorithms/Player.h"
 #include "../cr.ac.itcr.Algorithms/JsonParser.h"
 #include "../cr.ac.itcr.Algorithms/Backtracking.h"
+#include "../cr.ac.itcr.Algorithms/PathfindingAStar.h"
 #define M 20
 #define N 30
 using namespace std;
