@@ -133,7 +133,7 @@ void mServer::processMessage(string message){
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
                         if(aStar.sol[k][l] == 1){
-                            jsonParser->writePath(l*10, k*10);
+                            jsonParser->writePath(l*20, k*20);
                         }
                     }
                 }
@@ -143,11 +143,12 @@ void mServer::processMessage(string message){
             else if (Shooter->getTeam() == 2){
                 PathfindingAStar aStar(this->mat, 1, 10, x, y);
                 aStar.findPath();
+                aStar.printSol(aStar.sol);
 
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
                         if(aStar.sol[k][l] == 1){
-                            jsonParser->writePath(l*10, k*10);
+                            jsonParser->writePath(l*20, k*20);
                         }
                     }
                 }
@@ -162,7 +163,7 @@ void mServer::processMessage(string message){
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
                         if(backtracking.sol[k][l] == 1){
-                            jsonParser->writePath(l*10, k*10);
+                            jsonParser->writePath(l*20, k*20);
                         }
                     }
                 }
@@ -177,7 +178,7 @@ void mServer::processMessage(string message){
                 for (int k = 0; k < M; k++){
                     for (int l = 0; l < N; l++) {
                         if(backtracking.sol[k][l] == 1){
-                            jsonParser->writePath(l*10, k*10);
+                            jsonParser->writePath(l*20, k*20);
                         }
                     }
                 }
