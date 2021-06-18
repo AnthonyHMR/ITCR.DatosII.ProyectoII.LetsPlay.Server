@@ -19,6 +19,11 @@ El servidor debe implementar un algoritmo genético que se usa para aproximar un
 ## Bibliotecas necesarias 
 Este proyecto fue realizado en Ubuntu(Linux) en el lenguaje C++
 Primero se necesita una biblioteca de manejo de archivos JSON. Se puede instalar con los siguientes comandos:
-````
-sudo apt-get update
-sudo apt-get install nlohmann-json3-dev
+
+`apt-get update`
+`do apt-get install nlohmann-json3-dev`
+
+## Doocumentación interna:
+### [Doxygen de algoritmos](https://github.com/AnthonyHMR/ITCR.DatosII.ProyectoII.LetsPlay.Server/tree/main/doc/Algorithms)
+### [Doxygen de Estructuras de datos](https://github.com/AnthonyHMR/ITCR.DatosII.ProyectoII.LetsPlay.Server/tree/main/doc/DataStructures)
+### [Doxygen del Server](https://github.com/AnthonyHMR/ITCR.DatosII.ProyectoII.LetsPlay.Server/tree/main/doc/Server)
