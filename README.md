@@ -21,7 +21,7 @@ Este proyecto fue realizado en Ubuntu(Linux) en el lenguaje C++
 Primero se necesita una biblioteca de manejo de archivos JSON. Se puede instalar con los siguientes comandos:
 
 `apt-get update`
-`do apt-get install nlohmann-json3-dev`
+`sudo apt-get install nlohmann-json3-dev`
 
 ## Doocumentación interna:
 ### [Doxygen de algoritmos](https://github.com/AnthonyHMR/ITCR.DatosII.ProyectoII.LetsPlay.Server/tree/main/doc/Algorithms)
